@@ -9,12 +9,10 @@ Running one script recreates every graph and number in the PDF report.
 |---|---|
 | `pid_lib.py` | `PID` class (anti-windup, derivative-on-measurement, D filter, output limits), plants (`SpringMassDamper` with RK4, `ThirdOrderLag`), `simulate()`, `metrics()` |
 | `experiments.py` | Generates all 15 figures into `figures/` and every quoted number into `results.json` |
-| `build_report.py` | Rebuilds `PID_Report.pdf` from `results.json` + figures (optional) |
 | `PID_Report.pdf` | The 10-section beginner's guide (10 pages) |
-| `WRITEUP.md` | Approach, what worked, what didn't, what next |
 | `figures/` | Generated PNGs + `captions.json` |
 
-## Approach (short)
+## Approach 
 1. **Controller:** discrete PID, `u = Kp*e + Ki*sum(e*dt) + Kd*d/dt`, evaluated every controller step. Four real-world fixes are options in the class: output limit + back-calculation anti-windup, derivative on measurement, low-pass filter on D, no kick on the first call.
 2. **Plant:** the block's equation `m x'' + c x' + k x = u` integrated with RK4 at 1 ms. The controller output is held constant between updates, so slow controllers can be simulated.
 3. **Judging:** rise time (10→90 %), overshoot (%), settling time (±2 %), steady-state error (mean of last 5 % of run).
@@ -27,7 +25,6 @@ python -m venv venv
 source venv/bin/activate          # Windows: venv\Scripts\activate
 pip install -r requirements.txt   # numpy, matplotlib
 ```
-Only for rebuilding the PDF: `pip install reportlab pillow`
 
 ## Run
 ```bash
@@ -57,6 +54,3 @@ print(metrics(r["t"], r["y"]))
 
 ## Conventions
 Settling band ±2 %; steady-state error = target − mean of last 5 % of the window; "never" / NaN settling time = never entered the band within the run. All results are simulation only (no hardware).
-
-## Interview "what if" parameters
-Change these at the top of `experiments.py` (or in the call you care about): mass/damping/spring `M, C, K`, force limit `LIM`, final gains `FINAL`, noise `noise=` in the noise test, controller period `dt=`.
