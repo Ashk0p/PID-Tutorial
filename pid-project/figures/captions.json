@@ -1,0 +1,17 @@
+{
+ "fig01_loop": "The feedback loop: the controller acts on the gap between target and measurement.",
+ "fig02_openloop": "Final position = u/k, so holding 1 m needs u = k*1 = 20 N forever (the spring pulls back).",
+ "fig03_measures": "Rise time, overshoot, settling time and steady-state error marked on one response.",
+ "fig04_p_only": "P-only stops at Kp/(k+Kp): 0.20, 0.50, 0.83, 0.96 m for Kp=5,20,100,500.",
+ "fig05_sse_check": "Simulation dots sit on the formula line: the calculation matches the graphs.",
+ "fig06_pi": "Adding I drives the error to ~0 but larger Ki adds overshoot/oscillation.",
+ "fig07_pd": "Kd=0 overshoots ~32 %; Kd=20 gives 0 % overshoot (offset 0.0625 m remains).",
+ "fig08_compare": "PID is fast, has ~0 overshoot and zero final error; each other combo lacks something.",
+ "fig09_windup": "Without anti-windup the I term charges up while saturated and causes overshoot; back-calculation removes it.",
+ "fig10_noise": "Raw D makes the force jitter wildly; a low-pass filter on D cuts the jitter while keeping the response.",
+ "fig11_kick": "Differentiating the error gives a one-step spike (Kd/dt); differentiating the measurement removes it.",
+ "fig12_slow": "Slower updates add delay; beyond ~dt = 50 ms these gains oscillate and diverge.",
+ "fig13_manual": "Typical hand-tuning order: P, then D to tame overshoot, then more P, then a little I.",
+ "fig14_zn": "Left: P-only sustained swing gives Ku and Pu. Right: table gains are aggressive; reduced gains with D filtering overshoot less.",
+ "fig15_final": "Final controller: response (top) and how P, I, D add up to the force (bottom; settles at 20 N)."
+}
